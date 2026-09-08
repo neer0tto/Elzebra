@@ -1,9 +1,12 @@
 /* ===== Variables de color ===== */
 :root {
-  --color-fondo: #020202;
+  --color-fondo: #0b0b0d;
+  --color-carbon: #18171a;
   --color-dorado: #c9a24b;
   --color-texto: #f2ede4;
   --color-borde: #3a3630;
+  --font-titulo: 'Bebas Neue', sans-serif;
+  --font-texto: 'Poppins', sans-serif;
 }
 
 /* ===== Reset básico ===== */
@@ -23,15 +26,9 @@ body {
     radial-gradient(circle at 80% 85%, rgba(201, 162, 75, 0.10), transparent 60%),
     var(--color-fondo);
   color: var(--color-texto);
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-texto);
   font-weight: 300;
   line-height: 1.6;
-}
-
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--color-dorado);
-  font-weight: 600;
 }
 
 a {
@@ -44,7 +41,8 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: var(--color-fondo);
+  background-color: color-mix(in srgb, var(--color-fondo) 85%, transparent);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-borde);
 }
 
@@ -60,10 +58,10 @@ a {
 }
 
 .navbar__brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
+  font-family: var(--font-titulo);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
   color: var(--color-dorado);
-  letter-spacing: 0.03em;
 }
 
 .navbar__links {
@@ -85,85 +83,151 @@ a {
 /* ===== Portada ===== */
 .hero {
   position: relative;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 4rem 2rem 3rem;
+  padding: 4rem 2rem 7rem;
   overflow: hidden;
 }
 
-.hero-clipper {
+.hero__fondo-rayas {
+  position: absolute;
+  inset: -80px;
+  background-image: repeating-linear-gradient(120deg, var(--color-carbon) 0px, var(--color-carbon) 40px, var(--color-fondo) 40px, var(--color-fondo) 80px);
+  animation: deslizarRayas 24s linear infinite;
+  z-index: 0;
+}
+
+@keyframes deslizarRayas {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-160px, 80px); }
+}
+
+.hero__resplandor {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  height: 68%;
-  width: auto;
-  pointer-events: none;
-  z-index: 1;
-  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(201, 162, 75, 0.32) 0%, transparent 65%);
+  animation: pulsarResplandor 5s ease-in-out infinite;
+  z-index: 0;
 }
 
-.hero-clipper--izq {
-  left: -40px;
+@keyframes pulsarResplandor {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.1); }
 }
 
-.hero-clipper--der {
-  right: -40px;
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 11, 13, 0.35) 0%, rgba(11, 11, 13, 0.88) 100%);
+  z-index: 0;
 }
 
-@media (max-width: 900px) {
-  .hero-clipper {
-    display: none;
-  }
-}
-
+/* La marca (cebra + texto) queda como marca de agua de fondo, muy sutil */
 .hero__marca {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1.5rem;
+  width: min(85vw, 480px);
+  pointer-events: none;
 }
 
 .hero__zebra {
-  width: min(70vw, 340px);
-  opacity: 0.55;
-  mix-blend-mode: screen;
+  width: 100%;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
   margin-bottom: -6%;
 }
 
 .hero__texto-logo {
-  width: min(60vw, 300px);
-  opacity: 0.85;
-  filter: drop-shadow(0 0 8px rgba(201, 162, 75, 0.5))
-          drop-shadow(0 0 20px rgba(201, 162, 75, 0.3))
-          drop-shadow(0 0 40px rgba(201, 162, 75, 0.15));
+  width: 88%;
+  opacity: 0.2;
+  filter: drop-shadow(0 0 30px rgba(201, 162, 75, 0.2));
 }
 
 .hero__frase {
-  font-size: 1.05rem;
-  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 3;
+  font-family: var(--font-titulo);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: 0.03em;
   color: var(--color-texto);
-  opacity: 0.8;
+  text-shadow: 0 0 40px rgba(201, 162, 75, 0.4);
+  max-width: 700px;
+}
+
+/* ===== Ticker de servicios ===== */
+.ticker {
+  background: linear-gradient(90deg, #a9843c, var(--color-dorado) 50%, #a9843c);
+  color: var(--color-fondo);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.85rem 0;
+  position: relative;
+  z-index: 4;
+}
+
+.ticker__pista {
+  display: inline-flex;
+  gap: 2.5rem;
+  width: max-content;
+  animation: deslizarTicker 22s linear infinite;
+}
+
+.ticker__pista span {
+  font-family: var(--font-titulo);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.ticker__pista span::after {
+  content: '✂';
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+@keyframes deslizarTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ticker:hover .ticker__pista {
+  animation-play-state: paused;
 }
 
 /* ===== Secciones genéricas ===== */
 .seccion__titulo {
+  font-family: var(--font-titulo);
   text-align: center;
-  font-size: 2rem;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  letter-spacing: 0.03em;
   margin-bottom: 3rem;
   position: relative;
+  color: var(--color-dorado);
 }
 
 .seccion__titulo::after {
   content: "";
   display: block;
   width: 60px;
-  height: 1px;
-  background-color: var(--color-dorado);
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-dorado), #e8c878);
   margin: 1rem auto 0;
 }
 
@@ -176,7 +240,7 @@ a {
   border-top: 1px solid var(--color-borde);
 }
 
-/* ===== Servicios (estilo lista de menú) ===== */
+/* ===== Servicios (estilo lista de menú, sin tarjetas) ===== */
 .menu-servicios {
   list-style: none;
 }
@@ -187,6 +251,11 @@ a {
   gap: 0.75rem;
   padding: 1.1rem 0;
   border-bottom: 1px solid var(--color-borde);
+  transition: border-color 0.2s ease;
+}
+
+.menu-servicios__item:hover {
+  border-color: var(--color-dorado);
 }
 
 .menu-servicios__item:last-child {
@@ -194,9 +263,15 @@ a {
 }
 
 .menu-servicios__nombre {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
+  font-family: var(--font-titulo);
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
   white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.menu-servicios__item:hover .menu-servicios__nombre {
+  color: var(--color-dorado);
 }
 
 .menu-servicios__linea {
@@ -206,7 +281,6 @@ a {
 }
 
 .menu-servicios__precio {
-  font-family: 'Poppins', sans-serif;
   font-size: 1.05rem;
   color: var(--color-dorado);
   white-space: nowrap;
@@ -221,13 +295,39 @@ a {
 
 .galeria__item {
   aspect-ratio: 1 / 1;
+  background-color: var(--color-carbon);
+  background-image: repeating-linear-gradient(45deg, #201e21 0px, #201e21 16px, #100f11 16px, #100f11 32px);
   border: 1px solid var(--color-borde);
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
-  color: var(--color-borde);
+  color: var(--color-texto);
+  opacity: 0.75;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 40%, rgba(201, 162, 75, 0.25) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+.galeria__item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+  opacity: 1;
+}
+
+.galeria__item:hover::after {
+  transform: translateX(120%);
 }
 
 /* ===== Horario y ubicación ===== */
@@ -318,5 +418,13 @@ a {
 
   .navbar__links {
     gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__fondo-rayas,
+  .hero__resplandor,
+  .ticker__pista {
+    animation: none !important;
   }
 }
