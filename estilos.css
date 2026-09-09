@@ -44,6 +44,7 @@ a {
   background-color: color-mix(in srgb, var(--color-fondo) 85%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-borde);
+  transition: transform 0.3s ease;
 }
 
 .navbar__inner {
@@ -144,9 +145,33 @@ a {
 
 .hero__zebra {
   width: 100%;
-  opacity: 0.18;
+  opacity: 0.45;
+  filter: grayscale(1) sepia(0.5) brightness(1.4) saturate(2.2)
+          drop-shadow(0 0 30px rgba(201, 162, 75, 0.5))
+          drop-shadow(0 0 70px rgba(201, 162, 75, 0.3))
+          drop-shadow(0 0 130px rgba(201, 162, 75, 0.15));
   mix-blend-mode: screen;
   margin-bottom: -6%;
+}
+
+.destello {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f2ede4;
+  box-shadow: 0 0 8px 2px rgba(242, 237, 228, 0.8);
+  animation: parpadeo 3s ease-in-out infinite;
+}
+
+.destello--1 { top: 15%; left: 20%; animation-delay: 0s; }
+.destello--2 { top: 30%; right: 15%; animation-delay: 0.8s; }
+.destello--3 { top: 60%; left: 12%; animation-delay: 1.6s; }
+.destello--4 { top: 50%; right: 22%; animation-delay: 2.3s; }
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 .hero__texto-logo {
@@ -184,12 +209,6 @@ a {
 .hero__frase-linea2 {
   font-size: clamp(0.9rem, 2.5vw, 1.15rem);
   margin-top: 0.3rem;
-}
-
-.hero__frase-separador {
-  display: inline-block;
-  color: var(--color-dorado);
-  margin-right: 0.6em;
 }
 
 /* ===== Ticker de servicios ===== */
