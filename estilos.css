@@ -129,12 +129,11 @@ a {
   z-index: 0;
 }
 
-/* La marca (cebra + texto) queda como marca de agua de fondo, muy sutil */
+/* La marca (cebra + texto) queda como marca de agua de fondo, muy sutil.
+   position: relative (no absolute) para que el centrado del .hero se encargue
+   de ubicarla y nunca se recorte si el contenido crece de alto. */
 .hero__marca {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -145,26 +144,51 @@ a {
 
 .hero__zebra {
   width: 100%;
-  opacity: 0.25;
-  mix-blend-mode: multiply;
+  opacity: 0.18;
+  mix-blend-mode: screen;
   margin-bottom: -6%;
 }
 
 .hero__texto-logo {
-  width: 88%;
-  opacity: 0.2;
-  filter: drop-shadow(0 0 30px rgba(201, 162, 75, 0.2));
+  width: min(75vw, 420px);
+  opacity: 1;
+  filter: drop-shadow(0 0 15px rgba(201, 162, 75, 0.8))
+          drop-shadow(0 0 35px rgba(201, 162, 75, 0.5))
+          drop-shadow(0 0 70px rgba(201, 162, 75, 0.3));
 }
 
 .hero__frase {
   position: relative;
   z-index: 3;
+  margin-top: 1rem;
+  padding: 0.85rem 1.75rem;
+  border: 1px solid var(--color-dorado);
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.hero__frase-linea1,
+.hero__frase-linea2 {
   font-family: var(--font-titulo);
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--color-texto);
-  text-shadow: 0 0 40px rgba(201, 162, 75, 0.4);
-  max-width: 700px;
+}
+
+.hero__frase-linea1 {
+  font-size: clamp(0.95rem, 2.6vw, 1.25rem);
+}
+
+.hero__frase-linea2 {
+  font-size: clamp(0.85rem, 2.3vw, 1.05rem);
+  margin-top: 0.3rem;
+}
+
+.hero__frase-separador {
+  display: inline-block;
+  color: var(--color-dorado);
+  margin-right: 0.6em;
 }
 
 /* ===== Ticker de servicios ===== */
@@ -203,7 +227,7 @@ a {
 
 @keyframes deslizarTicker {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-25%); }
 }
 
 .ticker:hover .ticker__pista {
