@@ -126,7 +126,7 @@ a {
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 11, 13, 0.35) 0%, rgba(11, 11, 13, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(11, 11, 13, 0.35) 0%, rgba(11, 11, 13, 0.6) 100%);
   z-index: 0;
 }
 
@@ -145,13 +145,29 @@ a {
 
 .hero__zebra {
   width: 100%;
-  opacity: 0.45;
-  filter: grayscale(1) sepia(0.5) brightness(1.4) saturate(2.2)
+  opacity: 0.55;
+  filter: grayscale(1) sepia(0.5) brightness(1.4) saturate(2.6)
           drop-shadow(0 0 30px rgba(201, 162, 75, 0.5))
           drop-shadow(0 0 70px rgba(201, 162, 75, 0.3))
           drop-shadow(0 0 130px rgba(201, 162, 75, 0.15));
   mix-blend-mode: screen;
   margin-bottom: -6%;
+}
+
+.hero__poste-izq {
+  opacity: 0.55;
+  filter: grayscale(1) sepia(0.5) brightness(1.4) saturate(2.6)
+          drop-shadow(0 0 30px rgba(201, 162, 75, 0.5))
+          drop-shadow(0 0 70px rgba(201, 162, 75, 0.3))
+          drop-shadow(0 0 130px rgba(201, 162, 75, 0.15));
+  mix-blend-mode: screen;
+  position: absolute;
+  width: 35%;
+  max-width: 160px;
+  left: 2%;
+  top: 60%;
+  transform: translateY(-50%) rotate(-14deg);
+  z-index: -1;
 }
 
 .destello {
