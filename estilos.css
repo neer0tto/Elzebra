@@ -344,11 +344,12 @@ a {
     var(--color-carbon);
   border: 1px solid var(--color-borde);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transform: scale(var(--escala-scroll, 1));
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .servicio-card:hover {
-  transform: translateY(-8px);
+  transform: scale(var(--escala-scroll, 1)) translateY(-8px);
   border-color: var(--color-dorado);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(201, 162, 75, 0.35);
 }
