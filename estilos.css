@@ -63,6 +63,18 @@ a {
   font-size: 1.6rem;
   letter-spacing: 0.05em;
   color: var(--color-dorado);
+  display: flex;
+  align-items: center;
+}
+
+.navbar__icono {
+  height: 42px;
+  width: 42px;
+  object-fit: cover;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
 .navbar__links {
@@ -95,15 +107,15 @@ a {
 
 .hero__fondo-rayas {
   position: absolute;
-  inset: -80px;
+  inset: 0;
   background-image: repeating-linear-gradient(120deg, var(--color-carbon) 0px, var(--color-carbon) 40px, var(--color-fondo) 40px, var(--color-fondo) 80px);
   animation: deslizarRayas 24s linear infinite;
   z-index: 0;
 }
 
 @keyframes deslizarRayas {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-160px, 80px); }
+  from { background-position: 0 0; }
+  to { background-position: 160px 0; }
 }
 
 .hero__resplandor {
