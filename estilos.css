@@ -41,9 +41,11 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: color-mix(in srgb, var(--color-fondo) 85%, transparent);
+  background-color: color-mix(in srgb, var(--color-fondo) 97%, transparent);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-borde);
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, transparent, var(--color-dorado), #f2ede4, var(--color-dorado), transparent) 1;
+  box-shadow: 0 4px 20px -8px color-mix(in srgb, var(--color-dorado) 40%, transparent);
   transition: transform 0.3s ease;
 }
 
@@ -59,9 +61,11 @@ a {
 }
 
 .navbar__brand {
-  font-family: var(--font-titulo);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 600;
   font-size: 1.6rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   color: var(--color-dorado);
   display: flex;
   align-items: center;
@@ -75,6 +79,16 @@ a {
   mix-blend-mode: screen;
   vertical-align: middle;
   margin-right: 10px;
+}
+
+.navbar__texto {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
+  background: linear-gradient(180deg, #fbf8f2 0%, #f5d99a 30%, #e0b866 60%, #c49a4a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .navbar__links {
@@ -378,10 +392,12 @@ a {
 
 .galeria__item {
   aspect-ratio: 1 / 1;
-  background-color: var(--color-carbon);
-  background-image: repeating-linear-gradient(45deg, #201e21 0px, #201e21 16px, #100f11 16px, #100f11 32px);
-  border: 1px solid var(--color-borde);
+  border: 2px solid transparent;
   border-radius: 4px;
+  background:
+    linear-gradient(var(--color-carbon), var(--color-carbon)) padding-box,
+    repeating-linear-gradient(45deg, #201e21 0px, #201e21 16px, #100f11 16px, #100f11 32px) padding-box,
+    linear-gradient(90deg, transparent, var(--color-dorado), #f2ede4, var(--color-dorado), transparent) border-box;
   display: flex;
   align-items: center;
   justify-content: center;
