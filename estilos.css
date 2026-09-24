@@ -326,19 +326,11 @@ a {
   border-top: 1px solid var(--color-borde);
 }
 
-/* Servicios lleva su propio padding vertical (más compacto que
-   galería/horario) — antes 6rem/4rem, ver commit "Servicios: espaciado
-   compacto y animación en cascada bajar/subir" para el valor previo. */
-.servicios {
-  padding-top: 3.9rem;
-  padding-bottom: 3.9rem;
-}
-
 /* ===== Servicios (tarjetas animadas, 2 por fila) ===== */
 .servicios__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.15rem;
+  gap: 1.75rem;
 }
 
 .servicio-card {
@@ -390,32 +382,6 @@ a {
   border-radius: 30px;
   background: linear-gradient(135deg, var(--color-dorado), #e0b866);
   box-shadow: 0 6px 18px rgba(201, 162, 75, 0.35);
-}
-
-/* Animación en cascada de las tarjetas de Servicios (ver script.js): cada
-   tarjeta anima por separado al entrar en pantalla, con dirección distinta
-   según si el usuario baja o sube, y se repite cada vez (a diferencia del
-   resto de la web). --offset-y lo fija el JS antes de añadir ".visible"
-   para que la transición sepa desde qué lado entrar; sin JS o sin la clase
-   ".servicio-card--animable" la tarjeta se ve normal, siempre visible. */
-.servicio-card--animable {
-  --offset-y: 28px;
-  opacity: 0;
-  transform: translateY(var(--offset-y));
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.servicio-card--animable.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .servicio-card--animable {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 /* ===== Galería ===== */
@@ -566,11 +532,6 @@ a {
   .galeria,
   .horario {
     padding: 4rem 1.5rem;
-  }
-
-  .servicios {
-    padding-top: 2.6rem;
-    padding-bottom: 2.6rem;
   }
 
   .galeria__grid {
