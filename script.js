@@ -30,3 +30,17 @@ function actualizarEscalaServicios() {
 window.addEventListener('scroll', actualizarEscalaServicios);
 window.addEventListener('resize', actualizarEscalaServicios);
 actualizarEscalaServicios();
+
+// Los títulos, fotos y tarjetas aparecen suavemente al entrar en pantalla
+const elementosAnimados = document.querySelectorAll('.reveal, .aparece');
+
+const observadorAparicion = new IntersectionObserver((entradas) => {
+  entradas.forEach((entrada) => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add('revelado');
+      observadorAparicion.unobserve(entrada.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+elementosAnimados.forEach((el) => observadorAparicion.observe(el));
